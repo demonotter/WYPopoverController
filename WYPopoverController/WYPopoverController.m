@@ -848,6 +848,12 @@ static float edgeSizeFromCornerRadius(float cornerRadius) {
   return self;
 }
 
+- (void) handlePan:(UIPanGestureRecognizer *) recognizer {
+    if (recognizer.state == UIGestureRecognizerStateBegan) {
+        [self tapOut];
+    }
+}
+
 - (void)tapOut {
   [self.delegate popoverBackgroundViewDidTouchOutside:self];
 }
@@ -1799,7 +1805,11 @@ static WYPopoverTheme *defaultTheme_ = nil;
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:_backgroundView action:@selector(tapOut)];
     tap.cancelsTouchesInView = NO;
     [_overlayView addGestureRecognizer:tap];
-
+    
+      UIPanGestureRecognizer* pan = [[UIPanGestureRecognizer alloc] initWithTarget:_backgroundView action:@selector(handlePan:)];
+      pan.cancelsTouchesInView = NO;
+      [_overlayView addGestureRecognizer:pan];
+      
     if (self.dismissOnTap) {
       tap = [[UITapGestureRecognizer alloc] initWithTarget:_backgroundView action:@selector(tapOut)];
       tap.cancelsTouchesInView = NO;
@@ -2906,6 +2916,7 @@ static CGPoint WYPointRelativeToOrientation(CGPoint origin, CGSize size, UIInter
     [self positionPopover:YES];
   }
 }
+
 
 #pragma mark Memory management
 

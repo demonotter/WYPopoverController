@@ -2424,15 +2424,14 @@ static WYPopoverTheme *defaultTheme_ = nil;
     __typeof__(self) strongSelf = weakSelf;
 
     if (strongSelf) {
-      [strongSelf->_backgroundView removeFromSuperview];
-
-      strongSelf->_backgroundView = nil;
-
-      [strongSelf->_overlayView removeFromSuperview];
-      strongSelf->_overlayView = nil;
-
-      // inView is captured strongly in presentPopoverInRect:... method, so it needs to be released in dismiss method to avoid potential retain cycles
-      strongSelf->_inView = nil;
+        [strongSelf->_backgroundView removeFromSuperview];
+        [strongSelf->_overlayView removeFromSuperview];
+        
+        strongSelf->_backgroundView = nil;
+        strongSelf->_overlayView = nil;
+        
+        // inView is captured strongly in presentPopoverInRect:... method, so it needs to be released in dismiss method to avoid potential retain cycles
+        strongSelf->_inView = nil;
     }
 
     if (completion) {

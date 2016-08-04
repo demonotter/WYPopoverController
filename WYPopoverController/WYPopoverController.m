@@ -2851,7 +2851,7 @@ static CGPoint WYPointRelativeToOrientation(CGPoint origin, CGSize size, UIInter
 }
 
 - (void)didChangeDeviceOrientation:(NSNotification *)notification {
-  if (_isInterfaceOrientationChanging == NO) return;
+  //if (_isInterfaceOrientationChanging == NO) return;
 
   _isInterfaceOrientationChanging = NO;
 
